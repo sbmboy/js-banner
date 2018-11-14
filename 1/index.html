@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        
+
+        @font-face {
+            font-family: revicons;
+            src: url(fonts/revicons/revicons.eot?5510888);
+            src: url(fonts/revicons/revicons.eot?5510888#iefix) format("embedded-opentype"), 
+                url(fonts/revicons/revicons.woff?5510888) format("woff"), 
+                url(fonts/revicons/revicons.ttf?5510888) format("truetype"), 
+                url(fonts/revicons/revicons.svg?5510888#revicons) format("svg")
+            }
+
+            #home-section {
+                overflow: hidden;
+                background: #111111;
+            }
+
+            #home-section .tp-caption.Concept-Title {
+                font-size: 70px;
+                font-family: "Raleway", sans-serif;
+                font-weight: 800 !important;
+                letter-spacing: -1px !important;
+                text-align: left !important;
+            }
+
+            #home-section .tp-caption.Concept-SubTitle {
+                font-family: "Raleway", sans-serif;
+                font-style: normal !important;
+                font-weight: 400 !important;
+                text-align: left !important;
+                font-size: 20px;
+                color: #fff;
+            }
+
+            #home-section .tp-caption.Concept-SubTitle a {
+                font-style: normal !important;
+                margin-right: 20px !important;
+            }
+
+            #home-section .tp-caption.Concept-SubTitle a.button-one {
+                padding: 13px 30px;
+            }
+
+            #home-section .tp-caption.Concept-SubTitle a.button-two {
+                background: transparent;
+                border: 2px solid #fff !important;
+                color: #fff;
+            }
+
+            #home-section .tp-caption.Concept-SubTitle a.button-two:hover {
+                background: #fff;
+                color: #1B4F72;
+            }
+
+            #home-section .persephone .tp-bullet {
+                width: 50px;
+                height: 2px;
+                background: rgba(255, 255, 255, 0.3);
+                border: none;
+            }
+
+            #home-section .persephone .tp-bullet:hover,
+            #home-section .persephone .tp-bullet.selected {
+                background: #F7DC6F;
+            }
+
+            /*左右箭头*/
+            .zeus.tparrows {
+                cursor: pointer;
+                min-width: 70px;
+                min-height: 70px;
+                position: absolute;
+                display: block;
+                z-index: 100;
+                border-radius: 35px;
+                overflow: hidden;
+                background: rgba(0, 0, 0, .1)
+            }
+
+            .zeus.tparrows:before {
+                font-family: revicons;
+                font-size: 20px;
+                color: #fff;
+                display: block;
+                line-height: 70px;
+                text-align: center;
+                z-index: 2;
+                position: relative
+            }
+
+            .zeus.tparrows.tp-leftarrow:before {
+                content: "\e824"
+            }
+
+            .zeus.tparrows.tp-rightarrow:before {
+                content: "\e825"
+            }
+
+            .zeus .tp-title-wrap {
+                background: #000;
+                background: rgba(0, 0, 0, .5);
+                opacity: 0;
+                transform: scale(0);
+                -webkit-transform: scale(0)
+            }
+
+            .zeus .tp-arr-imgholder,
+            .zeus .tp-title-wrap {
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                position: absolute;
+                transition: all .3s;
+                -webkit-transition: all .3s;
+                -moz-transition: all .3s;
+                border-radius: 50%
+            }
+
+            .zeus .tp-arr-imgholder {
+                background-position: 50%;
+                background-size: cover;
+                transform: translateX(-100%);
+                -webkit-transform: translateX(-100%)
+            }
+
+            .zeus.tp-rightarrow .tp-arr-imgholder {
+                transform: translateX(100%);
+                -webkit-transform: translateX(100%)
+            }
+
+            .zeus.tparrows:hover .tp-arr-imgholder {
+                transform: translateX(0);
+                -webkit-transform: translateX(0);
+                opacity: 1
+            }
+
+            .zeus.tparrows:hover .tp-title-wrap {
+                transform: scale(1);
+                -webkit-transform: scale(1);
+                opacity: 1
+            }
+
+            .zeus .tp-bullet {
+                box-sizing: content-box;
+                -webkit-box-sizing: content-box;
+                border-radius: 50%;
+                background-color: transparent;
+                transition: opacity .3s ease;
+                width: 13px;
+                height: 13px;
+                border: 2px solid #fff
+            }
+
+            .zeus .tp-bullet:after {
+                content: "";
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                left: 0;
+                border-radius: 50%;
+                background-color: #fff;
+                transform: scale(0);
+                transform-origin: 50% 50%;
+                transition: transform .3s ease
+            }
+
+            .zeus .tp-bullet.selected:after,
+            .zeus .tp-bullet:hover:after {
+                transform: scale(1.2)
+            }
+
+            .zeus .tp-bullet-image,
+            .zeus .tp-bullet-imageoverlay {
+                width: 135px;
+                height: 60px;
+                position: absolute;
+                background: #000;
+                background: rgba(0, 0, 0, .5);
+                bottom: 25px;
+                left: 50%;
+                margin-left: -65px;
+                box-sizing: border-box;
+                background-size: cover;
+                background-position: 50%;
+                visibility: hidden;
+                opacity: 0;
+                -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
+                transform-origin: 50% 50%;
+                transition: all .3s ease;
+                border-radius: 4px
+            }
+
+            .zeus .tp-bullet-imageoverlay,
+            .zeus .tp-bullet-title {
+                z-index: 2;
+                transition: all .5s ease
+            }
+
+            .zeus .tp-bullet-title {
+                color: #fff;
+                text-align: center;
+                line-height: 15px;
+                font-size: 13px;
+                font-weight: 600;
+                z-index: 3;
+                visibility: hidden;
+                opacity: 0;
+                -webkit-backface-visibility: hidden;
+                backface-visibility: hidden;
+                transform-origin: 50% 50%;
+                transition: all .3s ease;
+                position: absolute;
+                bottom: 45px;
+                width: 135px;
+                vertical-align: middle;
+                left: -57px
+            }
+
+            .zeus .tp-bullet:hover .tp-bullet-image,
+            .zeus .tp-bullet:hover .tp-bullet-imageoverlay,
+            .zeus .tp-bullet:hover .tp-bullet-title {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0)
+            }
+
+            .zeus .tp-thumb {
+                opacity: 1
+            }
+
+            .zeus .tp-thumb-over {
+                background: #000;
+                background: rgba(0, 0, 0, .25);
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: 1;
+                transition: all .3s
+            }
+
+            .zeus .tp-thumb-more:before {
+                font-family: revicons;
+                color: #aaa;
+                color: hsla(0, 0%, 100%, .75);
+                line-height: 12px;
+                top: 20px;
+                right: 20px;
+                content: "\e825"
+            }
+
+            .zeus .tp-thumb-more:before,
+            .zeus .tp-thumb-title {
+                font-size: 12px;
+                display: block;
+                text-align: left;
+                position: absolute;
+                z-index: 2
+            }
+
+            .zeus .tp-thumb-title {
+                font-family: Raleway;
+                letter-spacing: 1px;
+                color: #fff;
+                line-height: 15px;
+                top: 0;
+                left: 0;
+                padding: 20px 35px 20px 20px;
+                width: 100%;
+                height: 100%;
+                box-sizing: border-box;
+                transition: all .3s;
+                -webkit-transition: all .3s;
+                font-weight: 500
+            }
+
+            .zeus .tp-thumb.selected .tp-thumb-more:before,
+            .zeus .tp-thumb:hover .tp-thumb-more:before {
+                color: #aaa
+            }
+
+            .zeus .tp-thumb.selected .tp-thumb-over,
+            .zeus .tp-thumb:hover .tp-thumb-over {
+                background: #000
+            }
+
+            .zeus .tp-thumb.selected .tp-thumb-title,
+            .zeus .tp-thumb:hover .tp-thumb-title {
+                color: #fff
+            }
+
+            .zeus .tp-tab {
+                opacity: 1;
+                box-sizing: border-box
+            }
+
+            .zeus .tp-tab-title {
+                display: block;
+                text-align: center;
+                background: rgba(0, 0, 0, .25);
+                font-family: Roboto Slab, serif;
+                font-weight: 700;
+                font-size: 13px;
+                line-height: 13px;
+                color: #fff;
+                padding: 9px 10px
+            }
+
+            .zeus .tp-tab.selected .tp-tab-title,
+            .zeus .tp-tab:hover .tp-tab-title {
+                color: #000;
+                background: #fff
+            }
+
+            /*下方的横线按钮*/
+            .tp-bullets.navbar,
+            .tp-tabs.navbar,
+            .tp-thumbs.navbar {
+                border: none;
+                min-height: 0;
+                margin: 0;
+                border-radius: 0;
+                -moz-border-radius: 0;
+                -webkit-border-radius: 0
+            }
+
+            .tp-bullets,
+            .tp-tabs,
+            .tp-thumbs {
+                position: absolute;
+                display: block;
+                z-index: 1000;
+                top: 0;
+                left: 0
+            }
+
+            /*persephone*/
+            .persephone.tparrows {
+                cursor: pointer;
+                background: #aaa;
+                background: hsla(0, 0%, 78%, .5);
+                width: 40px;
+                height: 40px;
+                position: absolute;
+                display: block;
+                z-index: 100;
+                border: 1px solid #f5f5f5
+            }
+
+            .persephone.tparrows:hover {
+                background: #333
+            }
+
+            .persephone.tparrows:before {
+                font-family: revicons;
+                font-size: 15px;
+                color: #fff;
+                display: block;
+                line-height: 40px;
+                text-align: center
+            }
+
+            .persephone.tparrows.tp-leftarrow:before {
+                content: "\e824"
+            }
+
+            .persephone.tparrows.tp-rightarrow:before {
+                content: "\e825"
+            }
+
+            .persephone.tp-bullets:before {
+                content: " ";
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background: #transparent;
+                padding: 10px;
+                margin-left: -10px;
+                margin-top: -10px;
+                box-sizing: content-box
+            }
+
+            .persephone .tp-bullet {
+                width: 12px;
+                height: 12px;
+                position: absolute;
+                background: #aaa;
+                border: 1px solid #e5e5e5;
+                cursor: pointer;
+                box-sizing: content-box
+            }
+
+            .persephone .tp-bullet.selected,
+            .persephone .tp-bullet:hover {
+                background: #222
+            }
+
+
+            /*button*/
+            a {
+                text-decoration: none;
+            }
+
+            a.button-white {
+                color: #fff;
+                font-size: 12px;
+                font-family: "Raleway", sans-serif;
+                text-transform: uppercase;
+                border: 1px solid #fff;
+                padding: 8px 30px !important;
+                background: transparent;
+                font-weight: 500;
+                -webkit-border-radius: 3px;
+                -moz-border-radius: 3px;
+                -ms-border-radius: 3px;
+                border-radius: 3px;
+                transition: all 0.2s ease-in-out;
+                -moz-transition: all 0.2s ease-in-out;
+                -webkit-transition: all 0.2s ease-in-out;
+                -o-transition: all 0.2s ease-in-out;
+            }
+
+            a.button-white:hover {
+                color: #333333;
+                background: #fff;
+            }
+
+            a.button-one {
+                color: #000;
+                font-size: 13px;
+                font-family: "Raleway", sans-serif;
+                text-transform: uppercase;
+                padding: 12px 30px;
+                background: #F7DC6F;
+                font-weight: 700;
+                -webkit-border-radius: 3px;
+                -moz-border-radius: 3px;
+                -ms-border-radius: 3px;
+                border-radius: 3px;
+                transition: all 0.2s ease-in-out;
+                -moz-transition: all 0.2s ease-in-out;
+                -webkit-transition: all 0.2s ease-in-out;
+                -o-transition: all 0.2s ease-in-out;
+                margin: 0;
+            }
+
+            a.button-one:hover {
+                color: #fff;
+                background: #333333;
+            }
+
+            .center-button {
+                text-align: center;
+            }
+
+            a.button-two {
+                color: #fff;
+                font-size: 13px;
+                font-family: "Raleway", sans-serif;
+                font-weight: 700;
+                padding: 12px 30px;
+                background: #1B4F72;
+                text-transform: uppercase;
+                -webkit-border-radius: 3px;
+                -moz-border-radius: 3px;
+                -ms-border-radius: 3px;
+                border-radius: 3px;
+            }
+
+            a.button-two:hover {
+                background: #F7DC6F;
+                color: #333333;
+            }
+
+            button.mfp-close,
+            button.mfp-arrow,
+            a.zoom {
+                outline: none;
+            }
+    </style>
+</head>
+
+<body>
+
+    <!-- Container -->
+    <div id="container">
+
+
+        <!-- home-section 
+			================================================== -->
+        <section id="home-section">
+            <div id="rev_slider_202_1_wrapper" class="rev_slider_wrapper fullscreen-container" data-alias="concept1"
+                style="background-color:#000000;padding:0px;">
+                <!-- START REVOLUTION SLIDER 5.1.1RC fullscreen mode -->
+                <div id="rev_slider_202_1" class="rev_slider fullscreenbanner" style="display:none;" data-version="5.1.1RC">
+                    <ul>
+                        <!-- SLIDE  -->
+                        <li data-index="rs-672" data-transition="fade" data-slotamount="default" data-easein="default"
+                            data-easeout="default" data-masterspeed="default" data-thumb="upload/slide1.jpg"
+                            data-rotate="0" data-saveperformance="off" data-title="unique" data-description="">
+                            <!-- MAIN IMAGE -->
+                            <img src="upload/slide1.jpg" alt="" data-bgposition="center center" data-bgfit="cover"
+                                data-bgrepeat="no-repeat" data-bgparallax="5" class="rev-slidebg" data-no-retina>
+                            <!-- LAYERS -->
+
+                            <!-- LAYER NR. 1 -->
+                            <div class="tp-caption Concept-Title tp-resizeme rs-parallaxlevel-2" id="slide-672-layer-2"
+                                data-x="['left','15','15','15']" data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']"
+                                data-fontsize="['60','55','42','32']" data-lineheight="['72','66','52','38']"
+                                data-voffset="['-10','-10','-10','-10']" data-whitespace="nowrap" data-transform_idle="o:1;"
+                                data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:0.9;sY:0.9;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;"
+                                data-transform_out="x:left(R);s:1000;e:Power3.easeIn;s:1000;e:Power3.easeIn;"
+                                data-start="1400" data-splitin="none" data-splitout="none" data-responsive_offset="on"
+                                style="z-index: 7; white-space: nowrap;text-align:center;">Construction
+                                &amp; <br> Building Template
+                            </div>
+
+                            <!-- LAYER NR. 2 -->
+                            <div class="tp-caption Concept-SubTitle tp-resizeme rs-parallaxlevel-2" id="slide-672-layer-1"
+                                data-x="['left','15','15','15']" data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']"
+                                data-voffset="['100','90','70','55']" data-fontsize="['20','19','16','13']"
+                                data-lineheight="['30','28','26','20']" data-width="none" data-height="none"
+                                data-whitespace="nowrap" data-transform_idle="o:1;" data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:0.9;sY:0.9;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;"
+                                data-transform_out="x:left(R);s:1000;e:Power3.easeIn;s:1000;e:Power3.easeIn;"
+                                data-start="1800" data-splitin="none" data-splitout="none" data-responsive_offset="on"
+                                style="z-index: 6; white-space: nowrap;font-style:italic;">We
+                                appreciate you visiting our website
+                            </div>
+
+                            <!-- LAYER NR. 3 -->
+                            <div class="tp-caption Concept-SubTitle tp-resizeme rs-parallaxlevel-2" id="slide-672-layer-3"
+                                data-x="['left','15','15','15']" data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']"
+                                data-voffset="['170','170','130','110']" data-fontsize="['13','13','11','11']"
+                                data-width="none" data-height="none" data-whitespace="nowrap" data-transform_idle="o:1;"
+                                data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:0.9;sY:0.9;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;"
+                                data-transform_out="x:left(R);s:1000;e:Power3.easeIn;s:1000;e:Power3.easeIn;"
+                                data-start="2300" data-splitin="none" data-splitout="none" data-responsive_offset="on"
+                                style="z-index: 6; white-space: nowrap;font-style:italic;"><a class="button-two" href="projects.html">Our
+                                    Projects</a><a class="button-one" href="contact.html">Contact
+                                    Us</a>
+                            </div>
+
+                        </li>
+                        <!-- SLIDE  -->
+                        <li data-index="rs-674" data-transition="fade" data-slotamount="default" data-easein="default"
+                            data-easeout="default" data-masterspeed="default" data-thumb="upload/slide2.jpg"
+                            data-rotate="0" data-saveperformance="off" data-title="professional" data-description="">
+                            <!-- MAIN IMAGE -->
+                            <img src="upload/slide2.jpg" alt="" data-bgposition="center center" data-bgfit="cover"
+                                data-bgrepeat="no-repeat" data-bgparallax="5" class="rev-slidebg" data-no-retina>
+                            <!-- LAYERS -->
+
+                            <!-- LAYER NR. 1 -->
+                            <div class="tp-caption Concept-Title tp-resizeme rs-parallaxlevel-2" id="slide-674-layer-2"
+                                data-x="['left','15','15','15']" data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']"
+                                data-fontsize="['60','55','42','32']" data-lineheight="['72','66','52','38']"
+                                data-voffset="['-10','-10','-10','-10']" data-whitespace="nowrap" data-transform_idle="o:1;"
+                                data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:0.9;sY:0.9;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;"
+                                data-transform_out="x:left(R);s:1000;e:Power3.easeIn;s:1000;e:Power3.easeIn;"
+                                data-start="1400" data-splitin="none" data-splitout="none" data-responsive_offset="on"
+                                style="z-index: 7; white-space: nowrap;text-align:center;">We
+                                make <br> your dreams live
+                            </div>
+
+                            <!-- LAYER NR. 2 -->
+                            <div class="tp-caption Concept-SubTitle tp-resizeme rs-parallaxlevel-2" id="slide-674-layer-1"
+                                data-x="['left','15','15','15']" data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']"
+                                data-voffset="['100','90','70','55']" data-fontsize="['20','19','16','13']"
+                                data-lineheight="['30','28','26','20']" data-width="none" data-height="none"
+                                data-whitespace="nowrap" data-transform_idle="o:1;" data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:0.9;sY:0.9;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;"
+                                data-transform_out="x:left(R);s:1000;e:Power3.easeIn;s:1000;e:Power3.easeIn;"
+                                data-start="1800" data-splitin="none" data-splitout="none" data-responsive_offset="on"
+                                style="z-index: 6; white-space: nowrap;font-style:italic;">We
+                                appreciate you visiting our website
+                            </div>
+
+                            <!-- LAYER NR. 3 -->
+                            <div class="tp-caption Concept-SubTitle tp-resizeme rs-parallaxlevel-2" id="slide-674-layer-3"
+                                data-x="['left','15','15','15']" data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']"
+                                data-voffset="['170','170','130','110']" data-fontsize="['13','13','11','11']"
+                                data-width="none" data-height="none" data-whitespace="nowrap" data-transform_idle="o:1;"
+                                data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:0.9;sY:0.9;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;"
+                                data-transform_out="x:left(R);s:1000;e:Power3.easeIn;s:1000;e:Power3.easeIn;"
+                                data-start="2300" data-splitin="none" data-splitout="none" data-responsive_offset="on"
+                                style="z-index: 6; white-space: nowrap;font-style:italic;"><a class="button-one" href="contact.html">Contact
+                                    Us</a>
+                            </div>
+                        </li>
+                        <!-- SLIDE  -->
+                        <li data-index="rs-675" data-transition="fade" data-slotamount="default" data-easein="default"
+                            data-easeout="default" data-masterspeed="default" data-thumb="upload/slide3.jpg"
+                            data-rotate="0" data-saveperformance="off" data-title="ideas" data-description="">
+                            <!-- MAIN IMAGE -->
+                            <img src="upload/slide3.jpg" alt="" data-bgposition="center center" data-bgfit="cover"
+                                data-bgrepeat="no-repeat" data-bgparallax="5" class="rev-slidebg" data-no-retina>
+                            <!-- LAYERS -->
+
+                            <!-- LAYER NR. 1 -->
+                            <div class="tp-caption Concept-Title tp-resizeme rs-parallaxlevel-2" id="slide-675-layer-2"
+                                data-x="['left','15','15','15']" data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']"
+                                data-fontsize="['60','55','42','32']" data-lineheight="['72','66','52','38']"
+                                data-voffset="['-10','-10','-10','-10']" data-whitespace="nowrap" data-transform_idle="o:1;"
+                                data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:0.9;sY:0.9;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;"
+                                data-transform_out="x:left(R);s:1000;e:Power3.easeIn;s:1000;e:Power3.easeIn;"
+                                data-start="1400" data-splitin="none" data-splitout="none" data-responsive_offset="on"
+                                style="z-index: 7; white-space: nowrap;text-align:center;">Flexible
+                                &amp; <br> Easy Customizable
+                            </div>
+
+                            <!-- LAYER NR. 2 -->
+                            <div class="tp-caption Concept-SubTitle tp-resizeme rs-parallaxlevel-2" id="slide-675-layer-1"
+                                data-x="['left','15','15','15']" data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']"
+                                data-voffset="['100','90','70','55']" data-fontsize="['20','19','16','13']"
+                                data-lineheight="['30','28','26','20']" data-width="none" data-height="none"
+                                data-whitespace="nowrap" data-transform_idle="o:1;" data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:0.9;sY:0.9;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;"
+                                data-transform_out="x:left(R);s:1000;e:Power3.easeIn;s:1000;e:Power3.easeIn;"
+                                data-start="1800" data-splitin="none" data-splitout="none" data-responsive_offset="on"
+                                style="z-index: 6; white-space: nowrap;font-style:italic;">We
+                                appreciate you visiting our website
+                            </div>
+
+                            <!-- LAYER NR. 3 -->
+                            <div class="tp-caption Concept-SubTitle tp-resizeme rs-parallaxlevel-2" id="slide-675-layer-3"
+                                data-x="['left','15','15','15']" data-hoffset="['0','0','0','0']" data-y="['middle','middle','middle','middle']"
+                                data-voffset="['170','170','130','110']" data-fontsize="['13','13','11','11']"
+                                data-width="none" data-height="none" data-whitespace="nowrap" data-transform_idle="o:1;"
+                                data-transform_in="z:0;rX:0;rY:0;rZ:0;sX:0.9;sY:0.9;skX:0;skY:0;opacity:0;s:1500;e:Power3.easeInOut;"
+                                data-transform_out="x:left(R);s:1000;e:Power3.easeIn;s:1000;e:Power3.easeIn;"
+                                data-start="2300" data-splitin="none" data-splitout="none" data-responsive_offset="on"
+                                style="z-index: 6; white-space: nowrap;font-style:italic;"><a class="button-one" href="projects.html">Our
+                                    Projects</a>
+                            </div>
+
+                        </li>
+                    </ul>
+                    <div class="tp-bannertimer tp-bottom" style="visibility: hidden !important;"></div>
+                </div>
+            </div>
+            <!-- END REVOLUTION SLIDER -->
+        </section>
+        <!-- End home section -->
+
+    </div>
+
+
+
+
+    <script src="js/shtepia-plugins.min.js"></script>
+    <script>
+        var tpj = jQuery;
+        var revapi202;
+        tpj(document).ready(function () {
+            if (tpj("#rev_slider_202_1").revolution == undefined) {
+                revslider_showDoubleJqueryError("#rev_slider_202_1");
+            } else {
+                revapi202 = tpj("#rev_slider_202_1").show().revolution({
+                    sliderType: "standard",
+                    jsFileLocation: "js/",
+                    sliderLayout: "fullscreen",
+                    dottedOverlay: "none",
+                    delay: 5000,
+                    navigation: {
+                        keyboardNavigation: "off",
+                        keyboard_direction: "horizontal",
+                        mouseScrollNavigation: "off",
+                        onHoverStop: "off",
+                        arrows: {
+                            enable: true,
+                            style: 'zeus',
+                            tmp: '<div class="tp-title-wrap"><div class="tp-arr-imgholder"></div></div>',
+                            left: {
+                                container: 'slider',
+                                h_align: 'left',
+                                v_align: 'center',
+                                h_offset: 20,
+                                v_offset: 55
+                            },
+
+                            right: {
+                                container: 'slider',
+                                h_align: 'right',
+                                v_align: 'center',
+                                h_offset: 20,
+                                v_offset: 55
+                            }
+                        },
+                        touch: {
+                            touchenabled: "on",
+                            swipe_threshold: 75,
+                            swipe_min_touches: 50,
+                            swipe_direction: "horizontal",
+                            drag_block_vertical: false
+                        },
+                        bullets: {
+
+                            enable: true,
+                            style: 'persephone',
+                            tmp: '',
+                            direction: 'horizontal',
+                            rtl: false,
+
+                            container: 'slider',
+                            h_align: 'center',
+                            v_align: 'bottom',
+                            h_offset: 0,
+                            v_offset: 55,
+                            space: 7,
+
+                            hide_onleave: false,
+                            hide_onmobile: false,
+                            hide_under: 0,
+                            hide_over: 9999,
+                            hide_delay: 200,
+                            hide_delay_mobile: 1200
+                        }
+                    },
+                    responsiveLevels: [1140, 1024, 778, 480],
+                    visibilityLevels: [1140, 1024, 778, 480],
+                    gridwidth: [1140, 1024, 778, 480],
+                    gridheight: [700, 700, 600, 600],
+                    lazyType: "none",
+                    parallax: {
+                        type: "scroll",
+                        origo: "slidercenter",
+                        speed: 1000,
+                        levels: [5, 10, 15, 20, 25, 30, 35, 40, 45, 46, 47, 48, 49, 50, 100, 55],
+                        type: "scroll",
+                    },
+                    shadow: 0,
+                    spinner: "off",
+                    stopLoop: "off",
+                    stopAfterLoops: -1,
+                    stopAtSlide: -1,
+                    shuffle: "off",
+                    autoHeight: "off",
+                    fullScreenAlignForce: "off",
+                    fullScreenOffsetContainer: "",
+                    fullScreenOffset: "",
+                    disableProgressBar: "on",
+                    hideThumbsOnMobile: "off",
+                    hideSliderAtLimit: 0,
+                    hideCaptionAtLimit: 0,
+                    hideAllCaptionAtLilmit: 0,
+                    debugMode: false,
+                    fallbacks: {
+                        simplifyAll: "off",
+                        nextSlideOnWindowFocus: "off",
+                        disableFocusListener: false,
+                    }
+                });
+            }
+        }); /*ready*/
+    </script>
+</body>
+
+</html>
